@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import { getMalwareById } from '../../services/malwareService'
+import FormatDate from '../../components/FormatDate'
 
 export default function VirusDetail() {
     const [virus, setVirus] = useState({})
@@ -29,21 +30,25 @@ export default function VirusDetail() {
                             <p className="text-colorPrimaryThin">{virus.description}</p>
                         </div>
                     </div>
-                    <table className="mt-4 w-full">
+                    <table className="mt-4 p-4 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead>
                             <tr>
-                                <th className="text-colorPrimary text-sm">Cách thức tấn công</th>
-                                <th className="text-colorPrimary text-sm">Cách phòng tránh</th>
-                                <th className="text-colorPrimary text-sm">Ngày tạo</th>
-                                <th className="text-colorPrimary text-sm">Ngày cập nhật</th>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Cách thức tấn công</th>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Cách phòng tránh</th>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Ngày tạo</th>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Ngày cập nhật</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="text-center">{virus.infection}</td>
-                                <td className="text-center">{virus.prevention}</td>
-                                <td className="text-center">{virus.createdDate}</td>
-                                <td className="text-center">{virus.updateDate || 'Không có'}</td>
+                                <td className="text-left text-md px-6 py-4">{virus.infection}</td>
+                                <td className="text-left text-md px-6 py-4">{virus.prevention}</td>
+                                <td className="text-left text-md px-6 py-4">
+                                    <FormatDate date={virus.createdDate} />
+                                </td>
+                                <td className="text-left text-md px-6 py-4">
+                                    <FormatDate date={virus.updateDate} />
+                                </td>
                             </tr>
                         </tbody>
                     </table>

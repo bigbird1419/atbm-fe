@@ -9,7 +9,7 @@ export default function Layout({ children }) {
             </div>
             <div className="container">
                 <div className="row justify-content-center">
-                    <div className=" max-w-4xl">
+                    <div className="max-w-6xl">
                         {children}
                     </div>
                 </div>

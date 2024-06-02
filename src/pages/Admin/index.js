@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Button from '../../components/Button'
 import { getMalwares, getMalwareById, putMalware, postMalware, delMalware } from '../../services/malwareService'
 import Pagination from '../../components/Pagination'
+import FormatDate from '../../components/FormatDate'
 
 export default function Admin() {
     const [showCreate, setShowCreate] = useState(false)
@@ -152,6 +153,8 @@ export default function Admin() {
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Tên mã</th>
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Điểm số</th>
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Mô tả</th>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Ngày tạo</th>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Cập nhật</th>
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Hành động</th>
                             </tr>
                         </thead>
@@ -161,6 +164,12 @@ export default function Admin() {
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center text-sm">{item.name}</td>
                                     <td className="text-center text-sm px-6 py-4">{item.score}</td>
                                     <td className="text-center text-sm px-6 py-4">{item.description}</td>
+                                    <td className="text-center text-sm px-6 py-4">
+                                        <FormatDate date={item.createdDate} />
+                                    </td>
+                                    <td className="text-center text-sm px-6 py-4">
+                                        <FormatDate date={item.updateDate} />
+                                    </td>
                                     <td className="text-center text-sm px-6 py-4">
                                         <div className='flex w-full justify-around'>
                                             <Button className={'px-2 py-1 bg-colorPrimaryThin text-white block rounded'} onClick={async () => await getCurVir(item.id)}>Sửa</Button>
