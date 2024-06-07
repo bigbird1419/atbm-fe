@@ -17,7 +17,6 @@ export default function Admin() {
 
     const getData = async () => {
         const rs = await getMalwares()
-        console.log(rs.data)
         setVirus(rs.data)
     }
     const getCurVir = async (id) => {
@@ -161,16 +160,16 @@ export default function Admin() {
                         <tbody>
                             {virus.map((item, i) => (
                                 <tr key={i} className='mb-4 bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center text-sm">{item.name}</td>
-                                    <td className="text-center text-sm px-6 py-4">{item.score}</td>
-                                    <td className="text-center text-sm px-6 py-4">{item.description}</td>
-                                    <td className="text-center text-sm px-6 py-4">
+                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm">{item.name}</td>
+                                    <td className="text-sm px-6 py-4">{item.score}</td>
+                                    <td className="text-sm px-6 py-4">{item.description}</td>
+                                    <td className="text-sm px-6 py-4">
                                         <FormatDate date={item.createdDate} />
                                     </td>
-                                    <td className="text-center text-sm px-6 py-4">
+                                    <td className="text-sm px-6 py-4">
                                         <FormatDate date={item.updateDate} />
                                     </td>
-                                    <td className="text-center text-sm px-6 py-4">
+                                    <td className="text-sm px-6 py-4">
                                         <div className='flex w-full justify-around'>
                                             <Button className={'px-2 py-1 bg-colorPrimaryThin text-white block rounded'} onClick={async () => await getCurVir(item.id)}>Sửa</Button>
                                             <Button className={'px-2 py-1 bg-colorPrimaryThin text-white block rounded'}
