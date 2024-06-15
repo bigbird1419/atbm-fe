@@ -21,7 +21,7 @@ export default function Header() {
                 </div>
                 <div className="w-1/5 ml-10">
                     <div>
-                        <Button to={'/admin'} className={'block bg-colorPrimaryThin text-center px-4 py-1 rounded-full font-medium text-white text-sm'}>
+                        <Button to={'/login'} className={'block bg-colorPrimaryThin text-center px-4 py-1 rounded-full font-medium text-white text-sm'}>
                             Thêm nội dung
                         </Button>
                     </div>

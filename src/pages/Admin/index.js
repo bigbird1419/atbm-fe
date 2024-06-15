@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
 import { getMalwares, getMalwareById, putMalware, postMalware, delMalware } from '../../services/malwareService'
 import Pagination from '../../components/Pagination'
 import FormatDate from '../../components/FormatDate'
+import {AuthContext} from '../../Contexts/AuthContext'
 
 export default function Admin() {
+    const {isLogin} = useContext(AuthContext)
     const [showCreate, setShowCreate] = useState(false)
     const [virus, setVirus] = useState([])
     const [curVir, setCurVir] = useState({})
@@ -14,6 +17,7 @@ export default function Admin() {
     const [virScore, setVirScore] = useState(curVir.score || '')
     const [virInfec, setVirInfec] = useState(curVir.infection || '')
     const [virPrev, setVirPrev] = useState(curVir.prevention || '')
+    const navigate = useNavigate()
 
     const getData = async () => {
         const rs = await getMalwares()
@@ -95,6 +99,10 @@ export default function Admin() {
     useEffect(() => {
         getData()
     }, [])
+
+    if(!isLogin){
+        navigate('/login')
+    }
 
     return (
         <div className='wrapper mt-8'>

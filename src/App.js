@@ -8,15 +8,19 @@ export default function App() {
             <div>
                 <Routes>
                     {routesConfig.map((route, index) => {
+                        let Wrapper = Layout;
                         const Page = route.component
+                        if(route.layout){
+                            Wrapper = route.layout
+                        }
                         return (
                             <Route
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
+                                    <Wrapper>
                                         <Page />
-                                    </Layout>
+                                    </Wrapper>
                                 }
                             />
                         )
