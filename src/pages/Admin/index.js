@@ -178,8 +178,8 @@ export default function Admin() {
                                         <FormatDate date={item.updateDate} />
                                     </td>
                                     <td className="text-sm px-6 py-4">
-                                        <div className='flex w-full justify-around'>
-                                            <Button className={'px-2 py-1 bg-colorPrimaryThin text-white block rounded'} onClick={async () => await getCurVir(item.id)}>Sửa</Button>
+                                        <div className='flex flex-col w-full justify-around'>
+                                            <Button className={'px-2 py-1 bg-colorPrimaryThin text-white block rounded mb-2'} onClick={async () => await getCurVir(item.id)}>Sửa</Button>
                                             <Button className={'px-2 py-1 bg-colorPrimaryThin text-white block rounded'}
                                                 onClick={async () => await hanldeDeleteMalware(item.id)}
                                             >Xóa</Button>

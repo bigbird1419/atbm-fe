@@ -22,11 +22,11 @@ export default function VirusDetail() {
             {Object.keys(virus).length > 0 &&
                 <div>
                     <div className="flex items-center w-full p-4 mt-8">
-                        <div className="flex justify-center items-center h-20 w-20 border-4 border-colorSecondary rounded-full mr-4">
+                        <div className="flex flex-none justify-center items-center h-20 w-20 border-4 border-colorSecondary rounded-full mr-4">
                             <p className="text-xl text-colorSecondary">{virus.score}</p>
                         </div>
                         <div className="flex-auto">
-                            <p className="text-colorPrimary uppercase text-xl font-medium">{virus.name}</p>
+                            <p className="text-colorPrimary uppercase text-xl font-medium mb-2">{virus.name}</p>
                             <p className="text-colorPrimaryThin">{virus.description}</p>
                         </div>
                     </div>

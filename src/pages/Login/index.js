@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Contexts/AuthContext'
 import Button from '../../components/Button'
 import { accounts } from '../../constants/accounts'
+import { en } from '../../constants/cipher'
 
 export default function Login() {
     const { isLogin, setIsLogin } = useContext(AuthContext)
@@ -24,11 +25,13 @@ export default function Login() {
             alert('Mật khẩu phải từ 8 kí tự')
             return
         } else {
-            if (email === accounts.email && btoa(password) === accounts.password) {
+            console.log(en(password).rs)
+            if (email === accounts.email && en(password).rs === accounts.password) {
                 setIsLogin(true)
                 navigate('/admin')
             }else{
                 alert('Tài khoản hoặc mật khẩu không chính xác!!!')
+                setIsLogin(false)
             }
         }
     }
