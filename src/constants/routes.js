@@ -3,7 +3,8 @@ const routes = {
     virus: '/search/:virusName',
     detail: '/virus/:virusId',
     login: '/login',
-    admin: '/admin'
+    admin: '/admin',
+    filter: '/filter/:categoryId'
 }
 
 export default routes

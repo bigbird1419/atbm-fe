@@ -1,24 +1,31 @@
 import { useEffect, useState } from "react"
 
-import { getMalwares } from '../../services/malwareService'
+import { getMalwares, getMalwaresByCategory } from '../../services/malwareService'
 import VirusItem from "./VirusItem"
 import { KEY } from "../../constants/pathService"
 import Pagination from "../Pagination"
 
-export default function Virus({ name = '', page = 1, size = 10, key = KEY }) {
+export default function Virus({ name = '', categoryId, page = 1, size = 10, key = KEY }) {
     const [virus, setVirus] = useState([])
     const [curPage, setCurPage] = useState(page)
     const [totalPage, setTotolPage] = useState(0)
 
-    const getData = async (name, page, size, key) => {
+    const getData = async (name, categoryId, page, size, key) => {
+        if (categoryId > 0) {
+            const rs = await getMalwaresByCategory(categoryId)
+            console.log(rs.data)
+            setVirus(rs.data)
+            return
+        }
         const rs = await getMalwares({ name, page, size, key })
+        console.log(rs.data)
         setVirus(rs.data)
         setTotolPage(rs.totalPage)
     }
 
     useEffect(() => {
         getData(name, page, size, key)
-    }, [name, page, size, key])
+    }, [name, page, size, key, categoryId])
 
     return (
         <div className="wrapper">

@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
 import { getMalwares, getMalwareById, putMalware, postMalware, delMalware } from '../../services/malwareService'
+import { getCategorys } from '../../services/categoryService'
 import Pagination from '../../components/Pagination'
 import FormatDate from '../../components/FormatDate'
-import {AuthContext} from '../../Contexts/AuthContext'
+import { AuthContext } from '../../Contexts/AuthContext'
 
 export default function Admin() {
-    const {isLogin} = useContext(AuthContext)
+    const { isLogin } = useContext(AuthContext)
     const [showCreate, setShowCreate] = useState(false)
     const [virus, setVirus] = useState([])
     const [curVir, setCurVir] = useState({})
@@ -17,10 +18,14 @@ export default function Admin() {
     const [virScore, setVirScore] = useState(curVir.score || '')
     const [virInfec, setVirInfec] = useState(curVir.infection || '')
     const [virPrev, setVirPrev] = useState(curVir.prevention || '')
+    const [categorys, setCategorys] = useState([])
+    const [curCategory, setCurCategory] = useState(1)
     const navigate = useNavigate()
 
     const getData = async () => {
         const rs = await getMalwares()
+        const aa = await getCategorys()
+        setCategorys(aa.data)
         setVirus(rs.data)
     }
     const getCurVir = async (id) => {
@@ -53,7 +58,10 @@ export default function Admin() {
                     description: virDes,
                     infection: virInfec,
                     prevention: virPrev,
-                    score: virScore
+                    score: virScore,
+                    category: {
+                        id: curCategory
+                    }
                 })
                 await getData()
                 clearData()
@@ -69,7 +77,10 @@ export default function Admin() {
                     description: virDes,
                     infection: virInfec,
                     prevention: virPrev,
-                    score: virScore
+                    score: virScore,
+                    category: {
+                        id: curCategory
+                    }
                 })
                 await getData()
                 clearData()
@@ -95,12 +106,15 @@ export default function Admin() {
             alert('Nhập sai thì hủy xóa!!!')
         }
     }
+    const handleSetCategory = (e) => {
+        setCurCategory(e.target.value)
+    }
 
     useEffect(() => {
         getData()
     }, [])
 
-    if(!isLogin){
+    if (!isLogin) {
         navigate('/login')
     }
 
@@ -108,35 +122,45 @@ export default function Admin() {
         <div className='wrapper mt-8'>
             {showCreate ?
                 <div className="row">
-                    <div className="col-6 ">
+                    <div className="col-4 ">
                         <div className="mb-3">
                             <label className="block text-md mb-2">Tên mã độc</label>
-                            <input className="w-full px-4 py-2" type="text" placeholder="Tên mã độc"
+                            <input className="w-full px-4 py-2 border" type="text" placeholder="Tên mã độc"
                                 value={virName} onChange={e => setVirName(e.target.value)} />
                         </div>
                     </div>
-                    <div className="col-6 ">
+                    <div className="col-4 ">
                         <div className="mb-3">
                             <label className="block text-md mb-2">Điểm số</label>
-                            <input className="w-full px-4 py-2" type="text" placeholder="Điểm số" value={virScore} onChange={e => setVirScore(e.target.value)} />
+                            <input className="w-full px-4 py-2 border" type="text" placeholder="Điểm số" value={virScore} onChange={e => setVirScore(e.target.value)} />
+                        </div>
+                    </div>
+                    <div className="col-4 ">
+                        <div className="mb-3 ">
+                            <label className="block text-md mb-2">Thể loại</label>
+                            <select className='w-full p-2 border' onChange={handleSetCategory}>
+                                {categorys.map((category, i) => (
+                                    <option key={i} value={category.id}>{category.name}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className="col-6 ">
                         <div className="mb-3">
                             <label className="block text-md mb-2">Cách thức tấn công</label>
-                            <input className="w-full px-4 py-2" type="text" placeholder="Cách thức tấn công" value={virInfec} onChange={e => setVirInfec(e.target.value)} />
+                            <input className="w-full px-4 py-2 border" type="text" placeholder="Cách thức tấn công" value={virInfec} onChange={e => setVirInfec(e.target.value)} />
                         </div>
                     </div>
                     <div className="col-6 ">
                         <div className="mb-3">
                             <label className="block text-md mb-2">Phòng tránh</label>
-                            <input className="w-full px-4 py-2" type="text" placeholder="Phòng tránh" value={virPrev} onChange={e => setVirPrev(e.target.value)} />
+                            <input className="w-full px-4 py-2 border" type="text" placeholder="Phòng tránh" value={virPrev} onChange={e => setVirPrev(e.target.value)} />
                         </div>
                     </div>
                     <div className="col-12 ">
                         <div className="mb-3">
                             <label className="block text-md mb-2">Mô tả</label>
-                            <textarea className="w-full px-4 py-2" value={virDes} onChange={e => setVirDes(e.target.value)} />
+                            <textarea className="w-full px-4 py-2 border" value={virDes} onChange={e => setVirDes(e.target.value)} />
                         </div>
                     </div>
                     <div className="flex justify-around">

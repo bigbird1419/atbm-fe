@@ -33,6 +33,7 @@ export default function VirusDetail() {
                     <table className="mt-4 p-4 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead>
                             <tr>
+                                <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Loại virus</th>
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Cách thức tấn công</th>
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Cách phòng tránh</th>
                                 <th scope='col' className="px-6 py-3 text-colorPrimary text-sm">Ngày tạo</th>
@@ -41,6 +42,7 @@ export default function VirusDetail() {
                         </thead>
                         <tbody>
                             <tr>
+                                <td className="text-left text-md px-6 py-4">{virus.category.name}</td>
                                 <td className="text-left text-md px-6 py-4">{virus.infection}</td>
                                 <td className="text-left text-md px-6 py-4">{virus.prevention}</td>
                                 <td className="text-left text-md px-6 py-4">
